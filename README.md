@@ -3,6 +3,9 @@
 In this project I was given a web-based application that reads RSS feeds. The first test suite 'RSS Feeds' was completed for me and I had to create code to complete the rest of the suites.
 
 # Steps Required To Run Application
+Clone or download the repository and run index.html in the browser of your choice. Test results will display at the bottom of the page.
+
+# Tests In Project
 1. The allFeeds object must be defined and must not be empty.
 2. Each feed in the `allFeeds` object must have a URL defined and the URL cannot be empty.
 3. Each feed in the `allFeeds` object must have a name defined and  the name cannot be empty.
