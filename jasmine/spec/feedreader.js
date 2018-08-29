@@ -34,7 +34,7 @@ $(function() {
          it('url defined', function() {
            for(let feed of allFeeds){
              expect(feed.url).toBeDefined(); //checks that url is defined
-             expect(feed.url).not.toBe(0); //checks that url is not empty
+             expect(feed.url.length).not.toBe(0); //checks that url is not empty
            }
          });
 
@@ -46,7 +46,7 @@ $(function() {
          it('name defined', function() {
            for(let feed of allFeeds){
              expect(feed.name).toBeDefined(); //checks that name is defined
-             expect(feed.name).not.toBe(0); //checks that name is not empty
+             expect(feed.name.length).not.toBe(0); //checks that name is not empty
            }
          });
     });
@@ -94,8 +94,8 @@ $(function() {
           loadFeed(0, done);
         });
         it('feed has at least 1 entry', function(){
-          const feed = document.querySelector('.feed'); //storing feed from dom
-          expect(feed.children.length).toBeGreaterThan(0); //making sure there are 1 or more children of feed...a child of feed is an .entry element
+          let entry = document.querySelectorAll('.feed .entry'); //getting all feed entries from dom
+          expect(entry.length).toBeGreaterThan(0); //making sure there are 1 or more entries
         });
          });
 
@@ -108,17 +108,15 @@ $(function() {
          let startFeed;
          let newFeed;
 
-         beforeEach(function (done) {
-           loadFeed(0, function () {        //load first feed
-               startFeed = allFeeds[0].url; //save it's url
-               done();
+         beforeEach(function (done){
+           loadFeed(0, function () {
+             startFeed = document.querySelector('.feed').innerHTML;
+             loadFeed(1, function () {
+               newFeed = document.querySelector('.feed').innerHTML;
+             done();
+             });
            });
-           loadFeed(1, function () {        //load second feed
-               newFeed = allFeeds[1].url;   //save it's url
-               done();
-           });
-       });
-
+         });
        it('feed changes when selected', function () {
            expect(startFeed).not.toBe(newFeed); //compare the urls to see that the feed will change
        });
